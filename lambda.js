@@ -3,7 +3,7 @@ var elasticsearch = require("elasticsearch"),
     promise       = require("bluebird"),
     config        = require("./config.json");
 
-var client = new elasticsearch.Client({ host : config.host, log : 'error' });
+var client = new elasticsearch.Client({ host : config.host, log : 'error', version : '5.0' });
 
 var createDocument = function(event) {
     return new promise(function(resolve, reject) {
