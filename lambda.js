@@ -34,13 +34,13 @@ var createIndex = function() {
                 click : { 
                     properties : {
                         serialNumber : { 
-                            type : "string" 
+                            type : "keyword" 
                         },
                         batteryVoltage : { 
                             type : "integer" 
                         },
                         clickType : { 
-                            type : "string" 
+                            type : "keyword" 
                         },
                         clickDate : {
                             type : "date", 
