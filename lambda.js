@@ -8,9 +8,9 @@ var client = new elasticsearch.Client({ host : config.host, log : 'error', versi
 var createDocument = function(event) {
     return new promise(function(resolve, reject) {
         client.index({
-          index: config.index + moment().utc().format('YYYY-MM-DD'),
-          type: config.type,
-          body: {
+            index : config.index + moment().utc().format('YYYY-MM-DD'),
+            type : config.type,
+            body : {
                 serialNumber : event.serialNumber,
                 batteryVoltage : parseInt(event.batteryVoltage.replace(/mV/g, "")),
                 clickType : event.clickType,
@@ -30,21 +30,23 @@ var createIndex = function() {
     return new promise(function(resolve, reject) {
         client.indices.create({
             index : config.index + moment().utc().format('YYYY-MM-DD'),
-            mappings : {
-                click : { 
-                    properties : {
-                        serialNumber : { 
-                            type : "keyword" 
-                        },
-                        batteryVoltage : { 
-                            type : "integer" 
-                        },
-                        clickType : { 
-                            type : "keyword" 
-                        },
-                        clickDate : {
-                            type : "date", 
-                            format : "date_time" 
+            body : {
+                mappings : {
+                    click : { 
+                        properties : {
+                            serialNumber : { 
+                                type : "keyword" 
+                            },
+                            batteryVoltage : { 
+                                type : "integer" 
+                            },
+                            clickType : { 
+                                type : "keyword" 
+                            },
+                            clickDate : {
+                                type : "date", 
+                                format : "date_time" 
+                            }
                         }
                     }
                 }
@@ -62,7 +64,7 @@ var createIndex = function() {
 var checkIndexExists = function() {
     return new promise(function(resolve, reject) {
         client.indices.exists({
-            index: config.index + moment().utc().format('YYYY-MM-DD')
+            index : config.index + moment().utc().format('YYYY-MM-DD')
         }, function(error, response, status) {
             resolve(response);
         });
